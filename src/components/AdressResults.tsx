@@ -1,16 +1,19 @@
 import { SimpleGrid, Box, Text, Heading } from '@chakra-ui/react';
 import { AdressResultType } from '../App';
 
+// 住所のオブジェクトが要素の配列の型
 type AdressResultsPropsType = {
   adressResults: AdressResultType[];
 };
 
 const AdressResults = ({ adressResults }: AdressResultsPropsType) => {
   const formatZipcode = (zipcode: string): string => {
+    // 数字のみの郵便番号をハイフン付きに整形
     const zipcodeText = `${zipcode.substr(0, 3)}-${zipcode.substr(3)}`;
     return zipcodeText;
   };
   if (adressResults.length === 0) {
+    // 住所の配列が空の場合は描画しない
     return null;
   }
   return (

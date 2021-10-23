@@ -5,6 +5,8 @@ import FormErrorMessage from './components/FormErrorMessage';
 import Loading from './components/Loading';
 import ZipcodeForm from './components/ZipcodeForm';
 
+// https://zipcloud.ibsnet.co.jp/api/search
+// APIから受け取る住所が入った配列の要素（オブジェクト）の型
 export type AdressResultType = {
   address1: string;
   address2: string;
@@ -31,12 +33,15 @@ function App() {
     )
       .then((res) => res.json())
       .then((data) => {
-        if (data.status === 400) {
+        if (data.status === 400 || data.status === 500) {
+          // パラメータエラーの場合、APIから{"status": 400}が返却される
+          // API内部で発生したエラーの場合、APIから{"status": 500}が返却される
           setAdressResults([]);
           setLoading(false);
           setError(data.message);
           return;
         } else if (data.status === 200 && data.results === null) {
+          // 存在しない郵便番号の場合は、APIから{"results": null, "status": 200}が返却される
           setAdressResults([]);
           setLoading(false);
           setError('該当する住所は見つかりませんでした。');
