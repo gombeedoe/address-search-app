@@ -1,2 +1,4 @@
-const Loading = () => <div className="loading">Loading...</div>;
+import { Spinner } from '@chakra-ui/react';
+
+const Loading = () => <Spinner />;
 export default Loading;

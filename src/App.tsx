@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Container, Box } from '@chakra-ui/react';
 import AdressResults from './components/AdressResults';
 import FormErrorMessage from './components/FormErrorMessage';
 import Loading from './components/Loading';
@@ -62,15 +63,25 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <Container maxW="container.xl" py="20">
       <ZipcodeForm
         zipcode={zipcode}
         setZipcode={setZipcode}
         getAdress={getAdress}
       />
-      {error && <FormErrorMessage message={error} />}
-      {loading ? <Loading /> : <AdressResults adressResults={adressResults} />}
-    </div>
+      {error && (
+        <Box mt="10">
+          <FormErrorMessage message={error} />
+        </Box>
+      )}
+      {loading ? (
+        <Box mt="10">
+          <Loading />
+        </Box>
+      ) : (
+        <AdressResults adressResults={adressResults} />
+      )}
+    </Container>
   );
 }
 

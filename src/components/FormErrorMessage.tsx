@@ -1,12 +1,15 @@
+import { Alert, AlertIcon } from '@chakra-ui/react';
+
 type FormErrorMessagePropsType = {
   message: string;
 };
 
 const FormErrorMessage = ({ message }: FormErrorMessagePropsType) => {
   return (
-    <div>
-      <p>{message}</p>
-    </div>
+    <Alert status="warning">
+      <AlertIcon />
+      {message}
+    </Alert>
   );
 };
 

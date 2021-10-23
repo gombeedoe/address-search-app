@@ -1,3 +1,4 @@
+import { SimpleGrid, Box, Text, Heading } from '@chakra-ui/react';
 import { AdressResultType } from '../App';
 
 type AdressResultsPropsType = {
@@ -14,23 +15,25 @@ const AdressResults = ({ adressResults }: AdressResultsPropsType) => {
   }
   return (
     <>
-      <p>〒{formatZipcode(adressResults[0].zipcode)}</p>
-      <ul>
+      <Heading as="h2" fontSize="lg" py="10">
+        〒{formatZipcode(adressResults[0].zipcode)}の検索結果
+      </Heading>
+      <SimpleGrid columns={2} spacing={5}>
         {adressResults.map((result: AdressResultType, index: number) => (
-          <li key={index}>
-            <div>
-              {result.kana1}
-              {result.kana2}
+          <Box key={index} p="5" borderWidth="1px" borderRadius="lg">
+            <Text fontSize="md">
+              {result.kana1}&nbsp;
+              {result.kana2}&nbsp;
               {result.kana3}
-            </div>
-            <div>
-              {result.address1}
-              {result.address2}
+            </Text>
+            <Text fontSize="xl">
+              {result.address1}&nbsp;
+              {result.address2}&nbsp;
               {result.address3}
-            </div>
-          </li>
+            </Text>
+          </Box>
         ))}
-      </ul>
+      </SimpleGrid>
     </>
   );
 };
